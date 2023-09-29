@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const chat = require("./routes/chat");
 const chatPremium = require("./routes/chatPremium");
+const messages = require("./routes/messages");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -21,8 +22,8 @@ app.use(
       "http://localhost:5501",
       "http://127.0.0.1:5500",
       "http://127.0.0.1:5501",
-      'https://simpleasoro.netlify.app',
-      'https://premiumasoro.netlify.app'
+      "https://simpleasoro.netlify.app",
+      "https://premiumasoro.netlify.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -34,7 +35,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", chat);
-app.use("/premium", chatPremium);
+app.use("/", chatPremium);
+app.use("/premium/api", messages);
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("app is listening");

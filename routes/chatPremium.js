@@ -1,17 +1,19 @@
 const express = require("express");
 const route = express.Router();
 const fetch = require("node-fetch");
+const database = require("../model/schema");
 
 const conversation = [];
 
-route.post("/", async (req, res) => {
+route.post("/premium", async (req, res) => {
+  // const {sender, reciever, messa}=req.body
   try {
     var url = "https://api.openai.com/v1/chat/completions";
     var api_key = process.env.API_KEY;
 
     conversation.push({
       role: "user",
-      content: `always reply very simply as a mechanic ${req.body.message}`,
+      content: `${req.body.message}. Dont exceed 150 words`,
     });
 
     const response = await fetch(url, {
@@ -33,8 +35,32 @@ route.post("/", async (req, res) => {
       role: "assistant",
       content: responseData.choices[0].message.content,
     });
+    res.send({
+      data: responseData.choices[0].message.content,
+      conversation: conversation,
+    });
 
-    res.send({ data: responseData.choices[0].message.content });
+    // var createMessage = `INSERT INTO messages (
+    //   sender,
+    //   reciever,
+    //   message,
+    //   timestamp,
+    //   chat_id) VALUES?`;
+
+    //   var values = [
+    //     [
+    //       sender,
+    //       reciever,
+    //       req.body.message,
+    //       date,
+    //       "TRUE",
+    //     ],
+    //   ];
+
+    //   database.query(createMessage, [values], (err, result) => {
+    //     if (err) throw err;
+    //     console.log(result);
+    //   });
   } catch (err) {
     console.error("An error occurred:", err);
     res.status(500).send({ data: "An error occurred" });
