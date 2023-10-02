@@ -5,8 +5,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const chat = require("./routes/chat");
-const chatPremium = require("./routes/chatPremium");
-const messages = require("./routes/messages");
+// const chatPremium = require("./routes/chatPremium");
+// const messages = require("./routes/messages");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -35,8 +35,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", chat);
-app.use("/", chatPremium);
-app.use("/premium/api", messages);
+// app.use("/", chatPremium);
+// app.use("/premium/api", messages);
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("app is listening");
