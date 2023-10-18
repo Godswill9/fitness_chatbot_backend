@@ -24,6 +24,7 @@ app.use(
       "http://127.0.0.1:5501",
       "https://simpleasoro.netlify.app",
       "https://premiumasoro.netlify.app",
+      "https://asoroautomotive.com/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
