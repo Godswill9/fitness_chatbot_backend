@@ -1,12 +1,13 @@
 const express = require("express");
 const route = express.Router();
 const fetch = require("node-fetch");
-const database = require("../model/schema");
+// const database = require("../model/schema");
 
 const conversation = [];
 
 route.post("/premium", async (req, res) => {
   // const {sender, reciever, messa}=req.body
+  console.log(req.body.message);
   try {
     var url = "https://api.openai.com/v1/chat/completions";
     var api_key = process.env.API_KEY;
@@ -30,6 +31,7 @@ route.post("/premium", async (req, res) => {
     });
 
     const responseData = await response.json();
+    console.log(responseData);
 
     conversation.push({
       role: "assistant",
