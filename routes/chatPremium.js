@@ -31,7 +31,6 @@ route.post("/premium", async (req, res) => {
     });
 
     const responseData = await response.json();
-    console.log(responseData);
 
     conversation.push({
       role: "assistant",
