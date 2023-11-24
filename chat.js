@@ -11,7 +11,7 @@ route.post("/chat", async (req, res) => {
 
     conversation.push({
       role: "user",
-      content: `always reply very simply as a mechanic and in not more than 30 words. ${req.body.message}`,
+      content: `${req.body.message}`,
     });
 
     const response = await fetch(url, {
