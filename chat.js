@@ -2,9 +2,12 @@ const express = require("express");
 const route = express.Router();
 const fetch = require("node-fetch");
 
-const conversation = [];
+var conversation = [];
 
 route.post("/chat", async (req, res) => {
+  if(req.body.numCount==0 || req.body.numCount==1){
+    conversation=[]
+  }
   try {
     var url = "https://api.openai.com/v1/chat/completions";
     var api_key = process.env.API_KEY;
